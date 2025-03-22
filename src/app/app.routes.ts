@@ -4,6 +4,11 @@ import {NotFoundComponent} from "./global/presentation/components/not-found/not-
 
 export const AppRoutes: Routes = [
   {
+    path: '',
+    redirectTo: 'formulario',
+    pathMatch: 'full'
+  },
+  {
     path: 'formulario',
     loadChildren: () => import('./formulario/formulario.module').then(m => m.FormularioModule)
   },
