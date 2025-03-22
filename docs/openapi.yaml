@@ -1,0 +1,13 @@
+openapi: 3.0.1
+info:
+  title: mf-manage-migrations
+  description: ''
+  version: '1.0'
+servers:
+  - url: 
+paths:
+ 
+components:
+ 
+security:
+

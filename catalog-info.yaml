@@ -1,0 +1,53 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: mf-manage-migrations
+  description: frontend para proceso de migracion
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+  links:
+    - url: https://dev.azure.com/CelulaArquitecturaTI/Arquitectura/_git/mf-manage-migrations?ref=test
+      title: mf-manage-migrations
+  tags:
+    - segmento-b2b
+    - producto-fijo
+    - dom-funcional-aprovisionamiento
+    - integration-sin-reuso
+    - lenguaje-typescript
+spec:
+  type: openapi
+  owner: CelulaArquitecturaTI
+  lifecycle: production
+  system: system:default/aks
+  definition:
+    $text: /docs/openapi.yaml
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: mf-manage-migrations
+  description: frontend para proceso de migracion
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+  links:
+    - url: https://dev.azure.com/CelulaArquitecturaTI/Arquitectura/_git/mf-manage-migrations?ref=test
+      title: mf-manage-migrations
+  tags:
+    - segmento:b2b
+    - producto:fijo
+    - dom-funcional:aprovisionamiento
+    - integration:sin-reuso
+    - lenguaje:typescript
+spec:
+  type: service
+  owner: CelulaArquitecturaTI
+  lifecycle: production
+  system: system:default/aks
+  dependsOn:
+    - component:default/access-information
+  providesApis:
+    - mf-manage-migrations
+  apiConsumedBy:
+    - component:default/access-information
+  consumesApis:
+    - component:default/access-information

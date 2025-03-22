@@ -1,0 +1,54 @@
+<div class="container">
+    <h2>Formulario de Registro</h2>
+    <form>
+      <div class="form-group">
+        <label for="url">URL:</label>
+        <input
+          type="text"
+          id="url"
+          name="url"
+          [(ngModel)]="url"
+          placeholder="Ingrese la URL"
+          (ngModelChange)="checkFormValidity()"
+        />
+      </div>
+      <div class="form-group">
+        <label for="namespace">Namespace:</label>
+        <input
+          type="text"
+          id="namespace"
+          name="namespace"
+          [(ngModel)]="namespace"
+          placeholder="Ingrese el namespace"
+          (ngModelChange)="checkFormValidity()"
+        />
+      </div>
+      <div class="form-group">
+        <label for="cluster">Cluster:</label>
+        <input
+          type="text"
+          id="cluster"
+          name="cluster"
+          [(ngModel)]="cluster"
+          placeholder="Ingrese el cluster"
+          (ngModelChange)="checkFormValidity()"
+        />
+      </div>
+      <button type="button" [disabled]="!isFormValid" (click)="iniciarProceso()">
+        Enviar
+      </button>
+      <span *ngIf="isCountdownRunningEnviar" class="countdown">{{ formatCountdown(countdownEnviar) }}</span>
+    </form>
+    <button *ngIf="mostrarBotonApuntamiento" type="button" (click)="cambiarApuntamiento()">
+      Cambiar Apuntamiento
+    </button>
+    <span *ngIf="isCountdownRunningCambiar" class="countdown">{{ formatCountdown(countdownCambiar) }}</span>
+  </div>
+  
+  <!-- Modal -->
+  <div class="modal" *ngIf="mostrarModal">
+    <div class="modal-content">
+      <p>{{ mensajeModal }}</p>
+      <button (click)="cerrarModal()">Cerrar</button>
+    </div>
+</div>

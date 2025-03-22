@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mf-manage-migrations
+  name: mf-manage-migrations
+  namespace: pruebas
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: mf-manage-migrations
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: mf-manage-migrations
+    spec:
+      containers:
+        - env:
+          image: imagekeyword
+          imagePullPolicy: Always
+          name: mf-manage-migrations
+          ports:
+            - containerPort: 8080
+              name: 80tcp01
+              protocol: TCP
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities: {}
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          stdin: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          tty: true
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-mf-manage-migrations
+spec:
+  ports:
+    - protocol: TCP
+      port: 8080
+      name: 8080tcp01
+      targetPort: 8080
+  type: ExternalName
+  sessionAffinity: None
+  externalName: mf-manage-migrations.pruebas.svc.cluster.local
