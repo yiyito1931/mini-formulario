@@ -21,6 +21,8 @@ export class CrearFormularioComponent {
   countdownCambiar: number = 0;
   isCountdownRunningEnviar: boolean = false;
   isCountdownRunningCambiar: boolean = false;
+  totalDurationEnviar: number = 0;
+  totalDurationCambiar: number = 0;
 
   ngOnInit() {
     this.checkFormValidity();
@@ -46,7 +48,8 @@ export class CrearFormularioComponent {
   }
 
   startCountdownEnviar(callback: () => void) {
-    this.countdownEnviar = 5 * 60; // 5 minutos en segundos
+    this.totalDurationEnviar = 5; // 5 segundos
+    this.countdownEnviar = this.totalDurationEnviar;
     this.isCountdownRunningEnviar = true;
     const interval = setInterval(() => {
       this.countdownEnviar--;
@@ -59,7 +62,8 @@ export class CrearFormularioComponent {
   }
 
   startCountdownCambiar(callback: () => void) {
-    this.countdownCambiar = 10; // 5 minutos en segundos
+    this.totalDurationCambiar = 10; // 10 segundos
+    this.countdownCambiar = this.totalDurationCambiar;
     this.isCountdownRunningCambiar = true;
     const interval = setInterval(() => {
       this.countdownCambiar--;
@@ -71,14 +75,12 @@ export class CrearFormularioComponent {
     }, 1000);
   }
 
-  formatCountdown(seconds: number): string {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${this.padZero(minutes)}:${this.padZero(remainingSeconds)}`;
+  getPercentageRemainingEnviar(): number {
+    return ((this.totalDurationEnviar - this.countdownEnviar) / this.totalDurationEnviar) * 100;
   }
 
-  padZero(num: number): string {
-    return num.toString().padStart(2, '0');
+  getPercentageRemainingCambiar(): number {
+    return ((this.totalDurationCambiar - this.countdownCambiar) / this.totalDurationCambiar) * 100;
   }
 
   cerrarModal() {

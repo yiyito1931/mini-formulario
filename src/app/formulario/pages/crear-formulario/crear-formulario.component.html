@@ -37,12 +37,12 @@
       <button type="button" [disabled]="!isFormValid" (click)="iniciarProceso()">
         Enviar
       </button>
-      <span *ngIf="isCountdownRunningEnviar" class="countdown">{{ formatCountdown(countdownEnviar) }}</span>
+      <span *ngIf="isCountdownRunningEnviar" class="countdown">{{getPercentageRemainingEnviar () | number: '1.0-0'}} %</span>
     </form>
     <button *ngIf="mostrarBotonApuntamiento" type="button" (click)="cambiarApuntamiento()">
       Cambiar Apuntamiento
     </button>
-    <span *ngIf="isCountdownRunningCambiar" class="countdown">{{ formatCountdown(countdownCambiar) }}</span>
+    <span *ngIf="isCountdownRunningCambiar" class="countdown">{{getPercentageRemainingCambiar () | number: '1.0-0'}} %</span>
   </div>
   
   <!-- Modal -->
