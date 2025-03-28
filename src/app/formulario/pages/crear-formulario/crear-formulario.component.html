@@ -1,6 +1,6 @@
 <div class="container">
     <h2>Formulario de Registro</h2>
-    <form>
+    <form id="migrationForm">
       <div class="form-group">
         <label for="url">URL:</label>
         <input
@@ -34,7 +34,7 @@
           (ngModelChange)="checkFormValidity()"
         />
       </div>
-      <button type="button" [disabled]="!isFormValid" (click)="iniciarProceso()">
+      <button type="button" [disabled]="!isFormValid" (click)="submitForm()">
         Enviar
       </button>
       <span *ngIf="isCountdownRunningEnviar" class="countdown">{{getPercentageRemainingEnviar () | number: '1.0-0'}} %</span>
@@ -43,12 +43,11 @@
       Cambiar Apuntamiento
     </button>
     <span *ngIf="isCountdownRunningCambiar" class="countdown">{{getPercentageRemainingCambiar () | number: '1.0-0'}} %</span>
-  </div>
-  
-  <!-- Modal -->
-  <div class="modal" *ngIf="mostrarModal">
-    <div class="modal-content">
-      <p>{{ mensajeModal }}</p>
-      <button (click)="cerrarModal()">Cerrar</button>
+    
+    <!-- Modal -->
+    <div class="modal" *ngIf="mostrarModal">
+      <div class="modal-content">
+        <p>{{ mensajeModal }}</p>
+        <button (click)="cerrarModal()">Cerrar</button>
+      </div>
     </div>
-</div>
